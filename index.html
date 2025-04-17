@@ -1,35 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prank Website</title>
+    <title>Peter Answers - Prank</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Courier New', monospace;
+            background: black;
+            color: white;
             text-align: center;
-            margin-top: 50px;
+            padding: 50px;
         }
-        input[type="text"] {
+        input, button {
             padding: 10px;
             margin: 10px;
-            font-size: 16px;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        #response {
-            margin-top: 20px;
-            font-size: 20px;
-            font-weight: bold;
+            background: #333;
+            color: white;
+            border: 1px solid white;
         }
     </style>
 </head>
 <body>
-    <h1>Peter, Answer the Following Question</h1>
-    <p>What's your favorite color?</p>
-    <input type="text" id="userAnswer" placeholder="Type your answer here">
-    <button onclick="showResponse()">Submit</button>
-    <div id="response"></div>
+    <h1>Peter Answers</h1>
+    <p>Virtual Tarot</p>
+
+    <div>
+        <h3>Petition*</h3>
+        <input type="text" id="petition" placeholder="Petition...">
+    </div>
+
+    <div>
+        <h3>Question</h3>
+        <input type="text" id="question" placeholder="Your question...">
+    </div>
+
+    <button onclick="generateAnswer()">Send Question</button>
+
+    <div id="answer" style="margin-top: 20px; font-style: italic;"></div>
+
+    <p>We are not permitted to choose the frame of our destiny. But what we put into it is ours.</p>
+    <p><em>Dag Hammarskjöld</em></p>
+
+    <script>
+        function generateAnswer() {
+            const question = document.getElementById("question").value;
+            const answerBox = document.getElementById("answer");
+
+            // Agar Petition mein ". " hai, toh question ko hi repeat karo!
+            if (document.getElementById("petition").value.includes(". ")) {
+                answerBox.innerHTML = question + "? <strong>YES!</strong> 😂";
+            } 
+            // Agar kuch aur hai, toh random jawab do
+            else {
+                const randomAnswers = [
+                    "Haseeb tera bhai hai!",
+                    "42 (Life ka ultimate jawab!)",
+                    "Mujhe nahi pata... 🤷‍♂️",
+                    "Google karle bhai!"
+                ];
+                answerBox.innerHTML = randomAnswers[Math.floor(Math.random() * randomAnswers.length)];
+            }
+        }
+    </script>
+</body>
+</html>

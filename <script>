@@ -1,0 +1,36 @@
+<script>
+  async function askBot() {
+    const question = document.getElementById("question").value;
+    const responseBox = document.getElementById("response");
+
+    const apiKey = "sk-proj-...tumhari wali key..."; // ⚠️ Tumhari original key yahan lagao
+
+    const headers = {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${apiKey}`
+    };
+
+    const body = {
+      model: "gpt-3.5-turbo",
+      messages: [
+        { role: "system", content: "You are a helpful assistant." },
+        { role: "user", content: question }
+      ]
+    };
+
+    try {
+      responseBox.textContent = "Thinking...";
+      const res = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: headers,
+        body: JSON.stringify(body)
+      });
+
+      const data = await res.json();
+      const answer = data.choices[0].message.content;
+      responseBox.textContent = answer;
+    } catch (error) {
+      responseBox.textContent = "Error: " + error.message;
+    }
+  }
+</script>
